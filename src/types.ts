@@ -31,3 +31,10 @@ export interface PlayAction {
   jumpBallLostPlayerNameI?: string | null;
   jumpBallLostPersonId?: number;
 }
+
+
+export interface GameData {
+  gameId: string;
+  type: string;           // "playbyplay"
+  actions: PlayAction[];
+}
