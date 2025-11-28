@@ -42,35 +42,45 @@ export default function TeamAggregates({ actions }: Props) {
 
     const s = stats[team];
 
-    // Field goals
-    if (action.actionType === '2pt' || action.actionType === '3pt') {
+    // Field goals: use isFieldGoal flag when available. Count attempts and makes.
+    const isFieldGoal = action.isFieldGoal === 1;
+    if (isFieldGoal) {
       s.FGA += 1;
       if (action.shotResult === 'Made') s.FGM += 1;
-    }
 
-    // 3-pointers
-    if (action.actionType === '3pt') {
-      s['3PTA'] += 1;
-      if (action.shotResult === 'Made') s['3PTM'] += 1;
+      // Three pointers
+      if (action.actionType === '3pt') {
+        s['3PTA'] += 1;
+        if (action.shotResult === 'Made') s['3PTM'] += 1;
+      }
+
+      // Add points for made field goals
+      if (action.shotResult === 'Made') {
+        if (action.actionType === '3pt') s.points += 3;
+        else s.points += 2; // assume 2pt for non-3pt field goals
+      }
     }
 
     // Free throws
     if (action.actionType === 'freethrow') {
       s.FTA += 1;
-      if (action.shotResult === 'Made') s.FTM += 1;
+      if (action.shotResult === 'Made') {
+        s.FTM += 1;
+        s.points += 1; // free throw is 1 point
+      }
     }
 
-    // Assists
-    if (action.assistPersonId) {
+    // Assists: only count when there is an assist on a made field goal
+    if (action.assistPersonId && action.shotResult === 'Made' && isFieldGoal) {
       s.AST += 1;
     }
 
-    // Points
-    if (action.pointsTotal) {
-      s.points += action.pointsTotal;
+    // Rebounds: actionType 'rebound' with subType 'offensive' or 'defensive'
+    if (action.actionType === 'rebound') {
+      const subtype = (action.subType || '').toLowerCase();
+      if (subtype.includes('off')) s.OREB += 1;
+      else if (subtype.includes('def')) s.DREB += 1;
     }
-
-    // TODO: Rebounds can be added if actionType includes OREB/DREB
   });
 
   // Convert stats object to array for rendering
