@@ -1,4 +1,4 @@
-import { GameData } from './types';
+import type { GameData } from './types';
 import gameData from './data/play-by-play.json';
 import './App.css';
 
