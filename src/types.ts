@@ -1,6 +1,7 @@
 export interface PlayAction {
   actionNumber: number;
   clock: string;
+  timeActual?: string;
   period: number;
   teamId: number | null;
   teamTricode: string | null;
@@ -23,7 +24,6 @@ export interface PlayAction {
   qualifiers?: string[];
   assistPlayerNameI?: string | null;
   assistPersonId?: number;
-  // Jump ball specific
   jumpBallRecoveredNameInitial?: string | null;
   jumpBallRecoveredPersonId?: number;
   jumpBallWonPlayerNameI?: string | null;
@@ -32,9 +32,8 @@ export interface PlayAction {
   jumpBallLostPersonId?: number;
 }
 
-
 export interface GameData {
   gameId: string;
-  type: string;           // "playbyplay"
+  type: string;
   actions: PlayAction[];
 }
