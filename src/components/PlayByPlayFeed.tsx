@@ -3,7 +3,7 @@ import type { PlayAction } from '../types';
 interface Props {
   actions: PlayAction[];
 }
-// Helper: format various clock representations to MM:SS for easy scanning.
+// Helper ISO to MM:SS
 function formatClock(clock?: string | number | null): string {
   if (clock === null || clock === undefined || clock === '') return '-';
 
@@ -13,7 +13,7 @@ function formatClock(clock?: string | number | null): string {
     return `${String(Number(m))}:${s.padStart(2, '0')}`;
   }
 
-  // Handle ISO-like duration strings from vendor, e.g. PT12M00.00S or PT0M05.00S
+  // Handle ISO format
   if (typeof clock === 'string' && clock.startsWith('PT')) {
     // Matches hours/minutes/seconds parts (we only need minutes and seconds here)
     const re = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?/i;
