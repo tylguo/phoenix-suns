@@ -13,19 +13,14 @@ The app loads static play-by-play data from `src/data/play-by-play.json` and dis
 ## Technical Decisions
 
 ### Stack Choice
-- **Frontend**: React with TypeScript for type safety and maintainability. Vite for fast development and building.
-- **Styling**: Tailwind CSS for utility-first styling, enabling rapid UI development without custom CSS files.
-- **Data Handling**: Static JSON import for simplicity, with client-side aggregation for stats.
-
-### Why This Stack?
-- **React + TypeScript**: Provides a robust, scalable foundation for interactive UIs. TypeScript catches errors early and improves code quality, crucial for handling unstructured vendor data.
-- **Vite**: Offers lightning-fast hot module replacement and builds, ideal for iterative development.
-- **Tailwind CSS**: Allows quick styling with consistent design tokens, reducing CSS overhead and enabling responsive, professional layouts.
+This app was built using Vite, React, TypeScript, and Tailwind CSS. I chose this combination because Vite is modern and fast for development. React was used for its component based architecture, meaning the feed, team aggregate and custom feature are built to be reusable. I am using TypeScript to ensure that the unstructured JSON data is handled safely. Tailwind CSS is used for easy styling while also looking neat.
 
 ### Trade-offs
-- **Flexibility vs. Performance**: Client-side data processing is simple but could be slow for very large datasets; server-side aggregation would scale better but adds complexity.
-- **Utility-First Styling**: Tailwind speeds up development but can lead to verbose class strings; considered acceptable for this project size.
-- **Static Data**: No real-time features, as the task focuses on end-of-game analysis; live updates would require WebSockets or polling.
+ - Client-side data processing is simple but could be slow for very large datasets; server-side aggregation would scale better but adds complexity.
+
+ - Tailwind speeds up development but can lead to verbose class strings but it's acceptable for this project size.
+
+ - The app just reads from a static JSON file which doesn't even cover a whole game. The upside is that is simple to implement and ensures reproducibility. However, it's not really indicative of realistic game scenario as there's no real time data.
 
 ## Data Findings
 
