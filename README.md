@@ -36,8 +36,8 @@ Here are several interesting patterns I came across:
 
 ## Feature Description
 
-The custom feature I chose to implement is a player comparison tool. This tool allowing coaches to compare two players' stats side-by-side from the game's play-by-play data. You can select players via dropdowns to view metrics like PTS, FGM-FGA, FG%, 3PTM-3PTA, 3PT%, FTM-FTA, FT%, OREB, DREB, and AST in a clean table.
+The custom feature I chose to implement is a Substitution Impact Analyzer. This function of this tool is that it quantifies how subbing affects team performance. It works by processing substitution events from the PBP data and identifies when players enter and exit the game. For each substitution, it compares team statistics (PRA) in the 3 minutes before and after the change. Then it calculates a composite impact score showing whether substitution improved or worsened performance. Finally, it aggregates data across all substitution changes for each player.
 
-This helps coaches evaluate matchups to ensure that his player is not a mismatch. It also can help with indentifying weaknesses if a certian player has higher metrics 
+Coaches can use this to identify whihc player changes results in the most drastic change in scoring, rebounding, and assists. With this knowledge, they can strategize to find better timing on resting players.
 
 ## AI Disclosure
