@@ -45,7 +45,7 @@ export default function PlayByPlayFeed({ actions }: Props) {
         <thead className="bg-gray-200 sticky top-0">
           <tr>
             <th className="p-2 text-center">Clock</th>
-            <th className="p-2 text-center">Quarter</th>
+            <th className="p-2 text-center">Period</th>
             <th className="p-2 text-center">Player</th>
             <th className="p-2 text-center">Description</th>
             <th className="p-2 text-center">Score</th>
@@ -53,7 +53,7 @@ export default function PlayByPlayFeed({ actions }: Props) {
         </thead>
         <tbody>
           {actions.map((action, idx) => (
-            <tr key={action.orderNumber ?? action.actionNumber ?? idx} className="border-b hover:bg-gray-100">
+            <tr key={action.orderNumber ?? action.actionNumber ?? idx} className="border-b hover:bg-gray-100 even:bg-gray-50">
               <td className="p-2">{formatClock(action.clock)}</td>
               <td className="p-2">{action.period}</td>
               <td className="p-2">{action.playerName || '-'}</td>
