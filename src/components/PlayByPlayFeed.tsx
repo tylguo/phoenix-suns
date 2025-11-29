@@ -53,7 +53,7 @@ export default function PlayByPlayFeed({ actions }: Props) {
         </thead>
         <tbody>
           {actions.map((action, idx) => (
-            <tr key={action.orderNumber ?? action.actionNumber ?? idx} className="border-b hover:bg-gray-100 even:bg-gray-50">
+            <tr key={action.orderNumber ?? action.actionNumber ?? idx} className="border-b hover:bg-gray-100" style={{ backgroundColor: idx % 2 === 0 ? '#f9fafb' : undefined }}>
               <td className="p-2">{formatClock(action.clock)}</td>
               <td className="p-2">{action.period}</td>
               <td className="p-2">{action.playerName || '-'}</td>
