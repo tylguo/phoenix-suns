@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+## Getting Started
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+First, run the development server
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) (or the provided URL) to view the application.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The app loads static play-by-play data from `src/data/play-by-play.json` and displays it in an easy-to-scan interface.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Technical Decisions
+
+### Stack Choice
+- **Frontend**: React with TypeScript for type safety and maintainability. Vite for fast development and building.
+- **Styling**: Tailwind CSS for utility-first styling, enabling rapid UI development without custom CSS files.
+- **Data Handling**: Static JSON import for simplicity, with client-side aggregation for stats.
+
+### Why This Stack?
+- **React + TypeScript**: Provides a robust, scalable foundation for interactive UIs. TypeScript catches errors early and improves code quality, crucial for handling unstructured vendor data.
+- **Vite**: Offers lightning-fast hot module replacement and builds, ideal for iterative development.
+- **Tailwind CSS**: Allows quick styling with consistent design tokens, reducing CSS overhead and enabling responsive, professional layouts.
+
+### Trade-offs
+- **Flexibility vs. Performance**: Client-side data processing is simple but could be slow for very large datasets; server-side aggregation would scale better but adds complexity.
+- **Utility-First Styling**: Tailwind speeds up development but can lead to verbose class strings; considered acceptable for this project size.
+- **Static Data**: No real-time features, as the task focuses on end-of-game analysis; live updates would require WebSockets or polling.
+
+## Data Findings
+ - A pattern in the data that stuck out to me immediately is how the `clock` times were formatted. It was formatted as ISO 8601 durations (PT12M00.00S) rather than a readable string (MM:SS). This was handled in `src/components/PlayByPlayFeed.tsx` with helper function that parses these strings using regex to extract minutes and seconds.
+
+ - Furthermore, when coding the logic for how the play by play feed will be ordered, I immediately jumped to ordering by `clock`, but I noticed that different events can happen at the same time which meant `clock` is not a reliable way to sort. I handled this by using `orderNumber` instead.
+
+ - Many fields have null values such as `x`, `y`, and `qualifiers`. This indicates that they are only relevant for specific action types. Another interesting observation is that certain actions have extra fields. For example, jump balls has `jumpBallWonPersonId`, `jumpBallLostPersonId`. Fouls also contains info about who drew the foul `foulDrawnPlayerName`. This is handled through optioinal fields in `PlayAction` interface, allowing TypeScript to accomodate a variation in vendor's API without errors. These fields can be accessed safely using nullish coalescing and conditional checks to ensure the app doesnt encounter errors on missing data. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Feature Description
+
+**Player Performance Comparison Tool**: A custom feature allowing coaches to compare two players' stats side-by-side from the game's play-by-play data. Select players via dropdowns to view metrics like PTS, FGM-FGA, FG%, 3PTM-3PTA, 3PT%, FTM-FTA, FT%, OREB, DREB, and AST in a clean table.
+
+This helps coaches evaluate matchups, assess player roles, and make strategic decisions (e.g., "How does the starter's 3PT% compare to the bench?"). Built using React state for selections and client-side aggregation for stats, it integrates seamlessly with the existing UI.
+
+## AI Disclosure
