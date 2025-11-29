@@ -42,6 +42,12 @@ export interface PlayAction {
   jumpBallWonPersonId?: number | string | null;
   jumpBallLostPlayerNameI?: string | null;
   jumpBallLostPersonId?: number | string | null;
+
+  reboundOffensiveTotal?: number | string | null;
+  reboundDefensiveTotal?: number | string | null;
+
+  // Allow any other vendor extras without breaking TS
+  [key: string]: any;
 }
 
 export interface GameData {
