@@ -13,7 +13,7 @@ export interface PlayAction {
   descriptor: string;
   description: string;
 
-  // assuming scores can be strings or numbers (depends on vendor's API)
+  // assuming scores can be strings or numbers ( but depends on vendor's API)
   scoreHome?: string | number | null;
   scoreAway?: string | number | null;
 
