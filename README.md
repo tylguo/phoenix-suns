@@ -28,38 +28,21 @@ The app loads static play-by-play data from `src/data/play-by-play.json` and dis
 - **Static Data**: No real-time features, as the task focuses on end-of-game analysis; live updates would require WebSockets or polling.
 
 ## Data Findings
+
+Here are several interesting patterns I came across:
+
  - A pattern in the data that stuck out to me immediately is how the `clock` times were formatted. It was formatted as ISO 8601 durations (PT12M00.00S) rather than a readable string (MM:SS). This was handled in `src/components/PlayByPlayFeed.tsx` with helper function that parses these strings using regex to extract minutes and seconds.
 
  - Furthermore, when coding the logic for how the play by play feed will be ordered, I immediately jumped to ordering by `clock`, but I noticed that different events can happen at the same time which meant `clock` is not a reliable way to sort. I handled this by using `orderNumber` instead.
 
- - Many fields have null values such as `x`, `y`, and `qualifiers`. This indicates that they are only relevant for specific action types. Another interesting observation is that certain actions have extra fields. For example, jump balls has `jumpBallWonPersonId`, `jumpBallLostPersonId`. Fouls also contains info about who drew the foul `foulDrawnPlayerName`. This is handled through optioinal fields in `PlayAction` interface, allowing TypeScript to accomodate a variation in vendor's API without errors. These fields can be accessed safely using nullish coalescing and conditional checks to ensure the app doesnt encounter errors on missing data. 
+ - `scoreHome` and `scoreAway` are strings ("2") not numbers. This is not really important to my implementation, but in the case I want to calculate something like total points, I would handle strings by first normalizing them into integers before any calculations. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ - Many fields have null values such as `x`, `y`, and `qualifiers`. This indicates that they are only relevant for specific action types. Another interesting observation is that certain actions have extra fields. For example, jump balls has `jumpBallWonPersonId`, `jumpBallLostPersonId`. Fouls also contains info about who drew the foul `foulDrawnPlayerName`. This is handled through optioinal fields in `PlayAction` interface; TypeScript definitions mark them as optional or nullable. The `[key: string]: any;` makes it so it allows the app to handle any extra vendor-specific fields without breaking TypeScript. This is more important in a more general sense as in this assessment, the data comes from a static JSON file. 
 
 ## Feature Description
 
-**Player Performance Comparison Tool**: A custom feature allowing coaches to compare two players' stats side-by-side from the game's play-by-play data. Select players via dropdowns to view metrics like PTS, FGM-FGA, FG%, 3PTM-3PTA, 3PT%, FTM-FTA, FT%, OREB, DREB, and AST in a clean table.
+The custom feature I chose to implement is a player comparison tool. This tool allowing coaches to compare two players' stats side-by-side from the game's play-by-play data. You can select players via dropdowns to view metrics like PTS, FGM-FGA, FG%, 3PTM-3PTA, 3PT%, FTM-FTA, FT%, OREB, DREB, and AST in a clean table.
 
-This helps coaches evaluate matchups, assess player roles, and make strategic decisions (e.g., "How does the starter's 3PT% compare to the bench?"). Built using React state for selections and client-side aggregation for stats, it integrates seamlessly with the existing UI.
+This helps coaches evaluate matchups to ensure that his player is not a mismatch. It also can help with indentifying weaknesses if a certian player has higher metrics 
 
 ## AI Disclosure
