@@ -13,7 +13,7 @@ The app loads static play-by-play data from `src/data/play-by-play.json` and dis
 ## Technical Decisions
 
 ### Stack Choice
-This app was built using Vite, React, TypeScript, and Tailwind CSS. I chose this combination because Vite is modern and fast for development. React was used for its component based architecture, meaning the feed, team aggregate and custom feature are built to be reusable. I am using TypeScript to ensure that the unstructured JSON data is handled safely. Tailwind CSS is used for easy styling while also looking neat.
+This app was built using Vite, React, TypeScript, and Tailwind CSS. I chose this combination because Vite is modern and fast for development. React was used for its component based architecture, meaning the feed, team aggregate and custom feature are built to be reusable. TypeScript was used to ensure that the unstructured JSON data is handled safely. Tailwind CSS was used for easy styling while also looking neat.
 
 ### Trade-offs
  - Client-side data processing is simple but could be slow for very large datasets; server-side aggregation would scale better but adds complexity.
