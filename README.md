@@ -16,7 +16,9 @@ The app loads static play-by-play data from `src/data/play-by-play.json` and dis
 This app was built using Vite, React, TypeScript, and Tailwind CSS. I chose this combination because Vite is modern and fast for development. React was used for its component based architecture, meaning the feed, team aggregate and custom feature are built to be reusable. TypeScript was used to ensure that the unstructured JSON data is handled safely. Tailwind CSS was used for easy styling while also looking neat.
 
 ### Trade-offs
- - Client-side data processing is simple but could be slow for very large datasets; server-side aggregation would scale better but adds complexity.
+ - Vite is very fast and good for prototyping but lacks the ecosystems compared to more established bundlers such as Webpack.
+
+ - Reach's component-based structure enables reusability but it is often complicated for a relatively simple app
 
  - Tailwind speeds up development but can lead to verbose class strings but it's acceptable for this project size.
 
