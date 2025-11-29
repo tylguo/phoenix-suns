@@ -40,7 +40,7 @@ Here are several interesting patterns I came across:
 
 The custom feature I chose to implement is a Substitution Impact Analyzer. This function of this tool is that it quantifies how subbing affects team performance. It works by processing substitution events from the PBP data and identifies when players enter and exit the game. For each substitution, it compares team statistics (PRA) in the 3 minutes before and after the change. Then it calculates a composite impact score showing whether substitution improved or worsened performance. Finally, it aggregates data across all substitution changes for each player.
 
-Coaches can use this to identify whihc player changes results in the most drastic change in scoring, rebounding, and assists. With this knowledge, they can strategize to find better timing on resting players.
+Coaches can use this to identify which player changes results in the most drastic change in scoring, rebounding, and assists. With this knowledge, they can strategize to find better timing on resting players.
 
 ## AI Disclosure
 
