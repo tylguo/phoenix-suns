@@ -45,7 +45,7 @@ export default function PlayByPlayFeed({ actions }: Props) {
         <thead className="bg-gray-200 sticky top-0">
           <tr>
             <th className="p-2 text-center">Clock</th>
-            <th className="p-2 text-center">Period</th>
+            <th className="p-2 text-center">Quarter</th>
             <th className="p-2 text-center">Player</th>
             <th className="p-2 text-center">Description</th>
             <th className="p-2 text-center">Score</th>
