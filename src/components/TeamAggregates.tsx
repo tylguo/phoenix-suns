@@ -66,11 +66,11 @@ export default function TeamAggregates({ actions }: Props) {
       s.FTA += 1;
       if (action.shotResult === 'Made') {
         s.FTM += 1;
-        s.points += 1; // free throw is 1 point
+        s.points += 1; // free throw is 1pt
       }
     }
 
-    // Assists: only count when there is an assist on a made field goal
+    // Assists: only count when there is an ast on a made fg
     if (action.assistPersonId && action.shotResult === 'Made' && isFieldGoal) {
       s.AST += 1;
     }
