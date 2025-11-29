@@ -41,3 +41,5 @@ The custom feature I chose to implement is a Substitution Impact Analyzer. This 
 Coaches can use this to identify whihc player changes results in the most drastic change in scoring, rebounding, and assists. With this knowledge, they can strategize to find better timing on resting players.
 
 ## AI Disclosure
+
+I used AI to help refresh my TypeScript syntax, formatting, conventions, and basic scaffolding because its been a while since I worked with TypeScript. I also did use AI to assist with minor implementation in my components with boilerplate code, basic React component structure and with the syntax for date manipulation/parsing. With that being said, the core logic for calculations, time window analysis, player filtering, fallbacks, typecasts, and overall design of the web app were implemented by me.
