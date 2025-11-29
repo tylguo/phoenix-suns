@@ -2,6 +2,7 @@ import type { GameData } from './types';
 import gameData from './data/play-by-play.json';
 import PlayByPlayFeed from './components/PlayByPlayFeed';
 import TeamAggregates from './components/TeamAggregates';
+import ShotChart from './components/ShotChart';
 import './App.css';
 
 
@@ -15,6 +16,7 @@ function App() {
       <h1 className="text-2xl font-bold mb-4">NBA Play-by-Play Viewer</h1>
       <PlayByPlayFeed actions={actions} />
       <TeamAggregates actions={actions} />
+      <ShotChart actions={actions} /> 
      </div>
   );
 }
