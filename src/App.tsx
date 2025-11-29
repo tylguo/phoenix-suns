@@ -11,11 +11,13 @@ function App() {
   console.log(actions); // Check browser console
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">NBA Play-by-Play Viewer</h1>
-      <PlayByPlayFeed actions={actions} />
-      <TeamAggregates actions={actions} />
-     </div>
+    <div className="min-h-screen p-6">
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 className="text-3xl font-bold text-center mb-6 text-purple-800">NBA Play-by-Play Viewer</h1>
+        <PlayByPlayFeed actions={actions} />
+        <TeamAggregates actions={actions} />
+      </div>
+    </div>
   );
 }
 
