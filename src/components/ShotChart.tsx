@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { PlayAction } from "../types";
 
 interface Props {
@@ -5,8 +6,14 @@ interface Props {
 }
 
 export default function ShotChart({ actions }: Props) {
-  // Filter for field goal attempts (shots)
-  const shots = actions.filter(action => Number(action.isFieldGoal) === 1 && action.x !== undefined && action.y !== undefined);
+  const [selectedTeam, setSelectedTeam] = useState<string>('all'); // 'all' means show all teams
+
+  // Filter for field goal attempts and optionally by team
+  const shots = actions.filter(action => {
+    const isShot = Number(action.isFieldGoal) === 1 && action.x !== undefined && action.y !== undefined;
+    const matchesTeam = selectedTeam === 'all' || action.teamTricode === selectedTeam;
+    return isShot && matchesTeam;
+  });
 
   // Map coordinates: assume x/y are 0-100 (court scale), convert to SVG pixels
   const shotDots = shots.map(action => {
@@ -16,9 +23,26 @@ export default function ShotChart({ actions }: Props) {
     return { x: svgX, y: svgY, made: isMade };
   });
 
+  // Get unique teams from actions
+  const teams = Array.from(new Set(actions.map(a => a.teamTricode).filter(Boolean))) as string[];
+
   return (
     <div className="mt-4 border rounded shadow p-4">
       <h3 className="text-lg font-bold mb-2">Shot Chart</h3>
+      <div className="mb-2">
+        <label htmlFor="team-select" className="mr-2">Filter by Team:</label>
+        <select
+          id="team-select"
+          value={selectedTeam}
+          onChange={(e) => setSelectedTeam(e.target.value)}
+          className="border rounded p-1"
+        >
+          <option value="all">All Teams</option>
+          {teams.map(team => (
+            <option key={team} value={team}>{team}</option>
+          ))}
+        </select>
+      </div>
       <svg width="400" height="200" viewBox="0 0 400 200" className="border">
         {/* Court background */}
         <rect width="400" height="200" fill="#f0f0f0" />
