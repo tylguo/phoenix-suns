@@ -44,11 +44,11 @@ export default function PlayByPlayFeed({ actions }: Props) {
       <table className="min-w-full table-auto">
         <thead className="bg-gray-200 sticky top-0">
           <tr>
-            <th className="p-2 text-left">Clock</th>
-            <th className="p-2 text-left">Period</th>
-            <th className="p-2 text-left">Player</th>
-            <th className="p-2 text-left">Description</th>
-            <th className="p-2 text-left">Score</th>
+            <th className="p-2 text-center">Clock</th>
+            <th className="p-2 text-center">Period</th>
+            <th className="p-2 text-center">Player</th>
+            <th className="p-2 text-center">Description</th>
+            <th className="p-2 text-center">Score</th>
           </tr>
         </thead>
         <tbody>

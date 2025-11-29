@@ -92,14 +92,14 @@ export default function TeamAggregates({ actions }: Props) {
       <table className="min-w-full table-auto">
         <thead className="bg-gray-200 sticky top-0">
           <tr>
-            <th className="p-2 text-left">Team</th>
-            <th className="p-2 text-left">FGM-FGA</th>
-            <th className="p-2 text-left">3PTM-3PTA</th>
-            <th className="p-2 text-left">FTM-FTA</th>
-            <th className="p-2 text-left">OREB</th>
-            <th className="p-2 text-left">DREB</th>
-            <th className="p-2 text-left">AST</th>
-            <th className="p-2 text-left">PTS</th>
+            <th className="p-2 text-center">Team</th>
+            <th className="p-2 text-center">FGM-FGA</th>
+            <th className="p-2 text-center">3PTM-3PTA</th>
+            <th className="p-2 text-center">FTM-FTA</th>
+            <th className="p-2 text-center">OREB</th>
+            <th className="p-2 text-center">DREB</th>
+            <th className="p-2 text-center">AST</th>
+            <th className="p-2 text-center">PTS</th>
           </tr>
         </thead>
         <tbody>
